@@ -1,0 +1,13 @@
+---
+- name: qwerty
+  hosts: all
+  tasks:
+    - name: checks the nginx package
+      apt: name=nginx state=latest
+    - name: checks the nginx service
+      service: name=nginx state=started
+    - name: alters the nginx default conf
+      lineinfile:
+        path: /var/www/html/index.nginx-debian.html
+        regexp: "Welcome to nginx!"
+        line: "<h1><p><script> document.write(new Date().toLocaleDateString()); </script></p></h1>"
